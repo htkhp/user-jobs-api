@@ -1,0 +1,32 @@
+// Get job by id
+###
+GET http://localhost:3000/jobs/1 HTTP/1.1
+content-type: application/json
+
+// Get all jobs
+###
+GET http://localhost:3000/jobs HTTP/1.1
+content-type: application/json
+
+// Create a job
+###
+POST http://localhost:3000/jobs HTTP/1.1
+content-type: application/json
+
+{
+    "description": "cto"
+}
+
+// Update a job
+###
+PATCH http://localhost:3000/jobs/5 HTTP/1.1
+content-type: application/json
+
+{
+    "description": "cto"
+}
+
+// Delete a job
+###
+DELETE http://localhost:3000/jobs/1 HTTP/1.1
+content-type: application/json
