@@ -1,0 +1,43 @@
+version: '3.9'
+services:
+  dev:
+    container_name: server-dev
+    build: .
+    image: users-job-api
+    command: npm run start:debug
+    ports:
+      - 3000:3000
+      - 9229:9229
+    networks:
+      - server-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+    environment:
+      MONGO_URL: mongodb
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: pass12345
+  mongodb:
+    image: mongo:5.0.0
+    container_name: server-mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pass12345
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - server-network
+    ports:
+      - 27017:27017
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+volumes:
+  mongodb-data:
+    name: mongodb-data
+networks:
+  server-network:

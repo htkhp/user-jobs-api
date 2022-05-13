@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Start development server",
+      "request": "launch",
+      "runtimeArgs": ["start"],
+      "args": ["--stage", "dev"],
+      "runtimeExecutable": "yarn",
+      "cwd": "${workspaceFolder}",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "pwa-node",
+      "console": "integratedTerminal"
+    }
+  ]
+}
